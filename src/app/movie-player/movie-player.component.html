@@ -1,6 +1,11 @@
 <ng-container>
   <div class="video-choices">
-    <img *ngFor="let movie of movies" [src]="movie.poster" (click)="playMovie(movie)">
+    <div class="video-container" *ngFor="let movie of movies"  (click)="playMovie(movie)">
+      <img [src]="movie.poster">
+      <div class="video-descriptions">
+        <p>{{movie.name}} ({{movie.year}})</p>
+      </div>
+    </div>
   </div>
   <div class="video-player">
      <iframe src="" #embeddedPlayer></iframe>
