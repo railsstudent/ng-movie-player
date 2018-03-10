@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 https://scotch.io/bar-talk/code-challenge-5-build-a-movie-player
 
 ## Deploy to github.io
-* ng build --prod --base-href "https://github.com/railsstudent/ng-movie-player"
+* ng build --prod --base-href "https://railsstudent.github.io/ng-movie-player"
 * ngh --no-silent
 
 ## Github.io URL
