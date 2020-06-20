@@ -1,0 +1,37 @@
+language: node_js
+node_js:
+  - '12'
+
+cache:
+  npm: true
+  directories:
+    - node_modules
+    - dist/
+
+env:
+  global:
+    - GITHUB_ORG="https://GH_TOKEN@github.com"
+    - REPO_NAME="ng-movie-player"
+    - GITHUB_NAME="railsstudent"
+    - GITHUB_EMAIL="cleung334@gmail.com"
+    - DIST_DIR="dist/ng-movie-player"
+    - GITHUB_PAGE="https://railsstudent.github.io"
+
+install:
+  - npm install
+
+script:
+  - npm audit --audit-level=moderate
+  - npm run lint
+  - ng deploy --base-href="$GITHUB_PAGE/$REPO_NAME/" --repo="$GITHUB_ORG/$GITHUB_NAME/$REPO_NAME.git" --name="$GITHUB_NAME" --email="$GITHUB_EMAIL" --no-silent
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    recipients:
+      - cleung334@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always

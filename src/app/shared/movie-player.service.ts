@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { Movie } from './movie';
-import {Observable} from 'rxjs/Observable';
 
-const API_URL: string = "https://scotch-mvplayer-api.herokuapp.com/api/v1";
+const API_URL = 'https://scotch-mvplayer-api.herokuapp.com/api/v1';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MoviePlayerService {
 
   constructor(private http: HttpClient) { }
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(API_URL);
+  getMovies() {
+    const sortName = (a: Movie, b: Movie) => a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    return this.http.get<Movie[]>(API_URL)
+      .pipe(
+        map((m: Movie[]) => m.sort(sortName))
+      );
   }
 }

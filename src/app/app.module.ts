@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MoviePlayerComponent } from './movie-player/movie-player.component';
-import { MoviePlayerService } from './shared';
 
 
 @NgModule({
@@ -15,9 +14,6 @@ import { MoviePlayerService } from './shared';
   imports: [
     BrowserModule,
     HttpClientModule
-  ],
-  providers: [
-    MoviePlayerService
   ],
   bootstrap: [AppComponent]
 })

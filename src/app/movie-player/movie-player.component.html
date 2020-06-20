@@ -1,6 +1,6 @@
 <ng-container>
   <div class="video-choices">
-    <div class="video-container" *ngFor="let movie of movies"  (click)="playMovie(movie)">
+    <div class="video-container" *ngFor="let movie of movies$ | async"  (click)="playMovie(movie)">
       <img [src]="movie.poster">
       <div class="video-descriptions">
         <p>{{movie.name}} ({{movie.year}})</p>

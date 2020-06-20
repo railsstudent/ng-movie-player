@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MoviePlayerService, Movie } from '../shared/';
 
 @Component({
@@ -8,19 +9,19 @@ import { MoviePlayerService, Movie } from '../shared/';
 })
 export class MoviePlayerComponent implements OnInit {
 
-  movies: Movie[];
-  @ViewChild('embeddedPlayer')
+  movies$: Observable<Movie[]>;
+  @ViewChild('embeddedPlayer', { static: true })
   video: any;
 
-  constructor(private moviePlayer: MoviePlayerService, private renderer: Renderer) { }
+  constructor(private moviePlayer: MoviePlayerService, private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.moviePlayer.getMovies().subscribe((data: Movie[]) => this.movies = data);
+    this.movies$ = this.moviePlayer.getMovies();
   }
 
   playMovie(movie: Movie) {
       const { trailer } = movie;
       const autoPlayTrailer = `${trailer}?autoplay=1`;
-      this.renderer.setElementProperty(this.video.nativeElement, 'src', autoPlayTrailer);
+      this.renderer.setProperty(this.video.nativeElement, 'src', autoPlayTrailer);
   }
 }
