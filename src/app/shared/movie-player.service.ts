@@ -16,7 +16,7 @@ export class MoviePlayerService {
     const sortName = (a: Movie, b: Movie) => a.name.toLowerCase().localeCompare(b.name.toLowerCase());
     return this.http.get<Movie[]>(API_URL)
       .pipe(
-        map((m: Movie[]) => m.sort(sortName))
+        map(movies => movies.sort(sortName))
       );
   }
 }

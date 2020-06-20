@@ -9,9 +9,9 @@ import { MoviePlayerService, Movie } from '../shared/';
 })
 export class MoviePlayerComponent implements OnInit {
 
-  movies$: Observable<Movie[]>;
   @ViewChild('embeddedPlayer', { static: true })
   video: any;
+  movies$: Observable<Movie[]>;
 
   constructor(private moviePlayer: MoviePlayerService, private renderer: Renderer2) { }
 
@@ -21,7 +21,9 @@ export class MoviePlayerComponent implements OnInit {
 
   playMovie(movie: Movie) {
       const { trailer } = movie;
-      const autoPlayTrailer = `${trailer}?autoplay=1`;
-      this.renderer.setProperty(this.video.nativeElement, 'src', autoPlayTrailer);
+      if (trailer && this.video) {
+        const autoPlayTrailer = `${trailer}?autoplay=1`;
+        this.renderer.setProperty(this.video.nativeElement, 'src', autoPlayTrailer);
+      }
   }
 }
