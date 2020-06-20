@@ -1,0 +1,58 @@
+:host {
+    --choice-flex-direction: column;
+}
+
+.video {
+    &-choices {
+        display: flex;
+        flex-direction: var(--choice-flex-direction);
+
+        img {
+            flex: 1 0 auto;
+            height: 100px;
+        }
+    }
+
+    &-container {
+        flex: 1;
+        height: 100px;
+        position: relative;
+    
+        display: flex;
+        &:hover .video-descriptions {
+          visibility: visible;
+          opacity: 1;
+        }
+    }
+    
+    &-descriptions {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    
+        padding: 0;
+        margin: 0;
+    
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+    
+        display: flex;
+        align-items: center;
+        p {
+          width: 100%;
+          text-align: center;
+        }
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    :host {
+      --choice-flex-direction: row;
+    }  
+}
+  

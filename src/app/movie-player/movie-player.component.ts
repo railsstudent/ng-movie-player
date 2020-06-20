@@ -1,11 +1,19 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MoviePlayerService, Movie } from '../shared/';
 
 @Component({
   selector: 'app-movie-player',
-  templateUrl: './movie-player.component.html',
-  styleUrls: ['./movie-player.component.scss']
+  template: `
+    <ng-container>
+      <app-video-list [movies]="movies$ | async" (movieClicked)="playMovie($event)"></app-video-list>
+      <div class="video-player">
+        <iframe src="" #embeddedPlayer></iframe>
+      </div>
+    </ng-container>
+  `,
+  styleUrls: ['./movie-player.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MoviePlayerComponent implements OnInit {
 
@@ -20,10 +28,10 @@ export class MoviePlayerComponent implements OnInit {
   }
 
   playMovie(movie: Movie) {
-      const { trailer } = movie;
-      if (trailer && this.video) {
-        const autoPlayTrailer = `${trailer}?autoplay=1`;
-        this.renderer.setProperty(this.video.nativeElement, 'src', autoPlayTrailer);
-      }
+    const { trailer } = movie;
+    if (trailer && this.video) {
+      const autoPlayTrailer = `${trailer}?autoplay=1`;
+      this.renderer.setProperty(this.video.nativeElement, 'src', autoPlayTrailer);
+    }
   }
 }
