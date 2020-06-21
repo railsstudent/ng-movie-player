@@ -17,7 +17,7 @@ export class MoviePlayerService {
     const sortName = (a: Movie, b: Movie) => a.name.toLowerCase().localeCompare(b.name.toLowerCase());
     if (localStorage.getItem('ng-movies')) {
       const movies = JSON.parse(localStorage.getItem('ng-movies')) as Movie[];
-      return of(movies)
+      return of(movies);
     }
 
     return this.http.get<Movie[]>(API_URL)
